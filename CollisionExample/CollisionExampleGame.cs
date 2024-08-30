@@ -72,6 +72,19 @@ namespace CollisionExample
             // TODO: Add your update logic here
             slimeGhost.Update(gameTime);
 
+			slimeGhost.Color = Color.White;
+			//Detect and process collisions
+			foreach (var coins in coins) 
+            {
+                if (!coins.collected && coins.Bounds.collidesWith(slimeGhost.Bounds))
+                {
+                    slimeGhost.Color = Color.Red;
+                    coins.collected = true;
+                    coinsLeft--;
+                }
+            }
+
+
             base.Update(gameTime);
         }
 
